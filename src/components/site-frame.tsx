@@ -229,7 +229,7 @@ function Footer() {
   return (
     <footer className="bg-sv-black text-white">
       <div className="px-6 py-16 md:px-14 md:py-24">
-        <div className="flex flex-col  items-center border-t border-white/12 pt-14">
+        <div className="flex flex-col items-center pt-14">
           <Image
             src="/svdesignsnywhitelogo.png"
             alt="SV Designs New York"

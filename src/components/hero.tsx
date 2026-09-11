@@ -30,7 +30,7 @@ export function Hero() {
           priority
           sizes="100vw"
           quality={85}
-          className="object-cover object-bottom lg:hidden"
+          className="object-cover object-left lg:hidden"
         />
       </div>
 
