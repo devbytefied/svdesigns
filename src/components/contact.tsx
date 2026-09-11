@@ -35,6 +35,7 @@ export function Contact() {
           from_name: (form.elements.namedItem("name") as HTMLInputElement)
             .value,
           reply_to: (form.elements.namedItem("email") as HTMLInputElement).value,
+          phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
           message: (form.elements.namedItem("message") as HTMLTextAreaElement)
             .value,
         },
@@ -48,7 +49,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" aria-label="Contact" className="scroll-mt-24 bg-paper text-ink">
+    <section id="contact" aria-label="Contact" className="bg-paper text-ink">
       <div className="mx-auto max-w-[1100px] px-6 py-32 md:px-14 md:py-44">
         <motion.p
           initial={{ opacity: 0, y: 24 }}
@@ -115,7 +116,7 @@ export function Contact() {
                 name="name"
                 autoComplete="name"
                 placeholder="Full name"
-                className="border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none"
+                className="border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none outline-none"
               />
             </label>
             <label className="flex flex-col gap-3">
@@ -128,7 +129,19 @@ export function Contact() {
                 name="email"
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none"
+                className="border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none outline-none"
+              />
+            </label>
+            <label className="flex flex-col gap-3">
+              <span className="text-[9px] uppercase tracking-[0.35em] text-ink/45">
+                Phone
+              </span>
+              <input
+                type="tel"
+                name="phone"
+                autoComplete="tel"
+                placeholder="+1 (555) 000-0000"
+                className="border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none outline-none"
               />
             </label>
             <label className="flex flex-col gap-3">
@@ -140,7 +153,7 @@ export function Contact() {
                 name="message"
                 rows={3}
                 placeholder="Tell us about your build."
-                className="resize-none border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none"
+                className="resize-none border-b border-hairline bg-transparent pb-3 text-base font-light tracking-normal text-ink placeholder:text-ink/30 focus:border-ink focus:outline-none outline-none"
               />
             </label>
 

@@ -30,7 +30,7 @@ body {
   color: var(--color-paper);
 }
 
-:focus-visible {
+:focus-visible:not(input, textarea, select, button) {
   outline: 1px solid currentColor;
   outline-offset: 4px;
 }
