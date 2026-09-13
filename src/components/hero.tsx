@@ -24,13 +24,13 @@ export function Hero() {
           className="hidden object-cover object-bottom lg:block"
         />
         <Image
-          src="/mobile-view.jpeg"
+          src="/mobile-view-new.jpeg"
           alt="SV Designs Defender 6x6 — exterior"
           fill
           priority
           sizes="100vw"
           quality={85}
-          className="object-cover object-left lg:hidden"
+          className="md:object-cover lg:hidden"
         />
       </div>
 

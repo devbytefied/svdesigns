@@ -235,14 +235,14 @@ function Footer() {
             alt="SV Designs New York"
             width={1937}
             height={488}
-            className="w-56 md:w-72"
+            className="w-40 md:w-52"
           />
           <p className="mt-8 text-center text-[11px] font-normal uppercase tracking-[0.4em] text-white/40">
-            Defender 6x6 — SV Designs Inc., New York
+            SV Designs Inc., New York
           </p>
         </div>
         <div className="mt-16 flex flex-col gap-5 border-t border-white/12 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="text-[11px] text-center md:text-left font-normal uppercase tracking-[0.35em] text-white/45">
+          <p className="text-[9px] text-center md:text-left font-normal uppercase tracking-[0.3em] text-white/45">
             © 2026 SV DESIGNS, INC. — ALL RIGHTS RESERVED.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-[11px] font-normal uppercase tracking-[0.3em] text-white/55">
@@ -280,6 +280,17 @@ function Footer() {
             </a>
           </div>
         </div>
+        <p className="mx-auto mt-10 max-w-3xl text-center text-[9px] font-light leading-relaxed tracking-[0.02em] text-white/30">
+          SV Designs, Inc. is not sponsored, associated, approved, endorsed, or
+          in any way affiliated with Jaguar Land Rover Limited. Jaguar Land
+          Rover Limited is the owner of numerous trademarks, both registered and
+          unregistered, including, without limitation, the Land Rover® name,
+          the Defender® name, and the distinctive shapes of Land Rover vehicles.
+          SV Designs, Inc. restores and modifies existing Land Rover Defender 25
+          year old vehicles; SV Designs, Inc. does not manufacture vehicles. Any
+          mention of Jaguar Land Rover Limited&apos;s trademarked names or other
+          marks and devices is for the purpose of reference only.
+        </p>
       </div>
     </footer>
   );

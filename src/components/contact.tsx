@@ -2,7 +2,7 @@
 
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 
 const INSTAGRAM_URL = "https://www.instagram.com/svdesignsinc/";
 const EMAIL = "INFO@SVDESIGNS.COM";
@@ -18,11 +18,18 @@ export function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function scheduleReset() {
+    if (resetTimer.current) clearTimeout(resetTimer.current);
+    resetTimer.current = setTimeout(() => setStatus("idle"), 4000);
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
       setStatus("error");
+      scheduleReset();
       return;
     }
     const form = event.currentTarget;
@@ -46,10 +53,15 @@ export function Contact() {
     } catch {
       setStatus("error");
     }
+    scheduleReset();
   }
 
   return (
-    <section id="contact" aria-label="Contact" className="bg-sv-black text-paper">
+    <section
+      id="contact"
+      aria-label="Contact"
+      className="bg-sv-black text-paper"
+    >
       <div className="mx-auto max-w-275 px-6 py-32 md:px-14 md:py-44">
         <motion.p
           initial={{ opacity: 0, y: 24 }}
@@ -125,7 +137,6 @@ export function Contact() {
                 type="text"
                 name="name"
                 autoComplete="name"
-                placeholder="Full name"
                 className="border-b border-hairline-light bg-transparent pb-3 text-base font-light tracking-normal text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none outline-none"
               />
             </label>
@@ -138,7 +149,6 @@ export function Contact() {
                 type="email"
                 name="email"
                 autoComplete="email"
-                placeholder="you@example.com"
                 className="border-b border-hairline-light bg-transparent pb-3 text-base font-light tracking-normal text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none outline-none"
               />
             </label>
@@ -150,7 +160,6 @@ export function Contact() {
                 type="tel"
                 name="phone"
                 autoComplete="tel"
-                placeholder="+1 (555) 000-0000"
                 className="border-b border-hairline-light bg-transparent pb-3 text-base font-light tracking-normal text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none outline-none"
               />
             </label>
@@ -162,27 +171,43 @@ export function Contact() {
                 required
                 name="message"
                 rows={3}
-                placeholder="Tell us about your build."
                 className="resize-none border-b border-hairline-light bg-transparent pb-3 text-base font-light tracking-normal text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none outline-none"
               />
             </label>
 
             <div className="mt-8">
               {status === "sent" ? (
-                <p className="text-sm font-light tracking-wide text-paper/75">
-                  Thank you — we will be in touch within two working days.
+                <p
+                  role="status"
+                  className="text-sm font-light tracking-wide text-paper/75"
+                >
+                  Our team will reach out soon
                 </p>
               ) : status === "error" ? (
-                <p className="text-sm font-light tracking-wide text-paper/75">
-                  Please try again, or write to us directly at {EMAIL}.
+                <p
+                  role="status"
+                  className="text-sm font-light tracking-wide text-paper/75"
+                >
+                  Something went wrong while sending your message. Please try
+                  again, or write to us directly at {EMAIL}.
                 </p>
-              ) : (
+              ) : null}
+
+              {status !== "sending" && (
                 <button
                   type="submit"
-                  disabled={status === "sending"}
-                  className="group relative inline-flex items-center justify-center border border-paper/25 px-8 py-3.5 text-[10px] font-normal uppercase tracking-[0.42em] text-paper transition-colors duration-500 ease-out hover:bg-paper hover:text-sv-black disabled:opacity-50"
+                  className="group relative mt-4 inline-flex items-center justify-center border border-paper/25 px-8 py-3.5 text-[10px] font-normal uppercase tracking-[0.42em] text-paper transition-colors duration-500 ease-out hover:bg-paper hover:text-sv-black"
                 >
-                  {status === "sending" ? "Sending" : "Request Consultation"}
+                  Send
+                </button>
+              )}
+              {status === "sending" && (
+                <button
+                  type="submit"
+                  disabled
+                  className="group relative mt-4 inline-flex items-center justify-center border border-paper/25 px-8 py-3.5 text-[10px] font-normal uppercase tracking-[0.42em] text-paper transition-colors duration-500 ease-out hover:bg-paper hover:text-sv-black disabled:opacity-50"
+                >
+                  Sending
                 </button>
               )}
             </div>
